@@ -1,39 +1,71 @@
-# Malling Bio – IMS3000 Orchestrator (Quarkus + Gradle multiproject)
+# Malling Bio IMS
 
-This is a lightweight Quarkus-based control plane for two IMS3000 servers (Sal 1 & Sal 2).
+Backend service for managing screen state, timing plans, and simulated cinema show flow for Malling Bio.
 
-## Key goals
-- Separate **app mode**: `AUTO`, `MANUAL` (read-only), `MAINTENANCE` (global pause)
-- Per-screen **connectivity**: `NO_CONNECTION` / `CONNECTING` / `CONNECTED`
-- Per-screen **operational state** (when connected): `IDLE`, `INTRO_LOOP`, `STARTING`, `REKLAMER`, `TRAILERS`, `FEATURE`, `ENDING`, `PREPARE_NEXT`
-- Support **two stub/test-driver screens** for development without cinema access
+## Purpose
 
-## Modules
-- `apps/orchestrator` – Quarkus REST API + scheduler/state supervision
-- `libs/domain` – enums + domain models (states, snapshots)
-- `libs/ims-soap` – IMS client abstraction + (placeholder) SOAP implementation
-- `libs/stub-ims` – deterministic simulator for two screens (dev/testing)
-- `libs/spl-parser` – SPL Base64 decode + XML parsing placeholders
+This project provides the backend for the Malling Bio screen supervision demo and future operational workflows.
 
-## Running (dev)
+The service is responsible for:
+
+- screen state transitions
+- timing plan handling
+- manual and automatic show events
+- backend simulation for development and demo use
+- API endpoints used by the dashboard frontend
+
+## Key Concepts
+
+The backend models a cinema screen lifecycle such as:
+
+- idle
+- intro loop
+- starting
+- advertisements
+- trailers
+- feature
+- ending
+- prepare next
+
+It supports both:
+
+- **automatic mode**, where timing-driven logic advances the show
+- **manual mode**, where an operator triggers key events
+
+## Project Status
+
+This project is currently used for:
+
+- development
+- demo scenarios
+- validation of state transitions
+- testing of frontend/backend interaction
+
+Production integration with real cinema/IMS hardware is not yet the goal of this version.
+
+## Related Project
+
+Frontend dashboard:
+
+- ../malling-bio-dashboard  
+  If the relative link does not work on GitHub, replace it with the full repository URL later.
+
+## Technology
+
+- Java
+- Quarkus
+- REST API
+- Domain-driven state handling
+- Dev simulation support
+
+## Running Locally
+
+### Prerequisites
+
+- Java 21 (or your chosen project version)
+- Gradle
+
+### Start in dev mode
+
 ```bash
-./gradlew :apps:orchestrator:quarkusDev
-```
-
-## Configuration
-See `apps/orchestrator/src/main/resources/application.yaml`.
-
-### Profiles
-- `dev` uses the stub IMS by default.
-- `prod` is intended for real SOAP (to be implemented in `libs/ims-soap`).
-
-## Gradle/Cache isolation (work vs hobby)
-Recommended: run builds using a dedicated `GRADLE_USER_HOME`.
-Example Powershell:
-```powershell
-$env:GRADLE_USER_HOME='C:\hobby\.gradle\malling-bio-ims'
-./gradlew --version
-```
-
-Quarkus versions used: 3.35.3
-Gradle wrapper version: 9.3.1
+./gradlew quarkusDev
