@@ -1,0 +1,25 @@
+[versions]
+quarkus = "3.35.3"
+junit-jupiter = "5.10.3"
+junit-platform = "1.10.3"
+mockito = "5.12.0"
+
+[plugins]
+quarkus = { id = "io.quarkus", version.ref = "quarkus" }
+
+[libraries]
+quarkus-bom = { module = "io.quarkus.platform:quarkus-bom", version.ref = "quarkus" }
+quarkus-rest = { module = "io.quarkus:quarkus-rest", version.ref = "quarkus" }
+quarkus-rest-jackson = { module = "io.quarkus:quarkus-rest-jackson", version.ref = "quarkus" }
+quarkus-arc = { module = "io.quarkus:quarkus-arc", version.ref = "quarkus" }
+quarkus-smallrye-health = { module = "io.quarkus:quarkus-smallrye-health", version.ref = "quarkus" }
+quarkus-config-yaml = { module = "io.quarkus:quarkus-config-yaml", version.ref = "quarkus" }
+quarkus-scheduler = { module = "io.quarkus:quarkus-scheduler", version.ref = "quarkus" }
+
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter" }
+junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit-jupiter" }
+junit-jupiter-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit-jupiter" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit-jupiter" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit-platform" }
+
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }

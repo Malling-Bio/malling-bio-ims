@@ -1,0 +1,15 @@
+# Gradle
+.gradle/
+**/build/
+
+# IntelliJ
+.idea/
+*.iml
+
+# Local overrides
+.m2-local/
+.m2/
+.gradle-user-home/
+
+# Logs
+*.log

@@ -1,0 +1,35 @@
+app:
+  mode: AUTO
+
+ims:
+  screens:
+    SAL1:
+      provider: stub  # stub | soap
+    SAL2:
+      provider: stub
+
+# When using real SOAP:
+# ims:
+#   screens:
+#     SAL1:
+#       provider: soap
+#       baseUrl: http://10.0.0.11:10000
+#       adminUser: admin
+#       adminPassword: changeit
+#     SAL2:
+#       provider: soap
+#       baseUrl: http://10.0.0.12:10000
+#       adminUser: admin
+#       adminPassword: changeit
+
+quarkus:
+  http:
+    port: 8080
+    cors:
+      enabled: true
+      origins: http://localhost:4200,http://127.0.0.1:4200
+      methods: GET,PUT,POST,OPTIONS
+      headers: "*"
+
+  jackson:
+    write-dates-as-timestamps: false
