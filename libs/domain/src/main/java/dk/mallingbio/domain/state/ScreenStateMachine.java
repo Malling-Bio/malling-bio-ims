@@ -50,6 +50,17 @@ public class ScreenStateMachine {
                     yield TransitionResult.noChange(ctx.operationalState());
                 }
             }
+            case MANUAL_START_REQUESTED -> {
+                if (ctx.appMode() == AppMode.MANUAL && ctx.isConnected()) {
+                    yield TransitionResult.to(
+                            OperationalState.STARTING,
+                            ScreenAction.STOP_SCHEDULER,
+                            ScreenAction.PLAY
+                    );
+                } else {
+                    yield TransitionResult.noChange(ctx.operationalState());
+                }
+            }
             case MANUAL_EARLY_START_REQUESTED -> {
                 if (ctx.commandsAllowed()) {
                     yield TransitionResult.to(

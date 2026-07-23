@@ -61,6 +61,29 @@ class ScreenStateMachineTest {
     }
 
     @Test
+    void introLoop_to_starting_when_manualStartRequested_in_manual_mode() {
+        ScreenContext ctx = ctx(OperationalState.INTRO_LOOP, AppMode.MANUAL, ConnectivityState.CONNECTED);
+
+        TransitionResult result = machine.handle(ctx, ScreenEvent.MANUAL_START_REQUESTED);
+
+        assertEquals(OperationalState.STARTING, result.newState());
+        assertEquals(
+                List.of(ScreenAction.STOP_SCHEDULER, ScreenAction.PLAY),
+                result.actions()
+        );
+    }
+
+    @Test
+    void introLoop_stays_when_manualStartRequested_in_auto_mode() {
+        ScreenContext ctx = ctx(OperationalState.INTRO_LOOP, AppMode.AUTO, ConnectivityState.CONNECTED);
+
+        TransitionResult result = machine.handle(ctx, ScreenEvent.MANUAL_START_REQUESTED);
+
+        assertEquals(OperationalState.INTRO_LOOP, result.newState());
+        assertTrue(result.actions().isEmpty());
+    }
+
+    @Test
     void introLoop_stays_when_delayRequested() {
         ScreenContext ctx = ctx(OperationalState.INTRO_LOOP, AppMode.AUTO, ConnectivityState.CONNECTED);
 
