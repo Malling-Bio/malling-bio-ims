@@ -47,8 +47,31 @@ Production integration with real cinema/IMS hardware is not yet the goal of this
 
 Frontend dashboard:
 
-- ../malling-bio-dashboard  
-  If the relative link does not work on GitHub, replace it with the full repository URL later.
+- https://github.com/malling-bio/malling-bio-dashboard
+
+## Architecture
+
+The system consists of:
+
+- this backend service (IMS simulation and state engine)
+- a separate frontend dashboard for visualization and control
+
+The backend exposes REST endpoints used by the dashboard for:
+
+- polling current screen state
+- submitting manual control events
+- retrieving timing plan data
+
+## API
+
+The service exposes REST endpoints for:
+
+- screen status and state
+- timing plan configuration
+- manual control actions
+- simulation and development support
+
+The API is primarily consumed by the Malling Bio Dashboard frontend.
 
 ## Technology
 
@@ -69,3 +92,11 @@ Frontend dashboard:
 
 ```bash
 ./gradlew quarkusDev
+```
+
+## Application URL
+
+Once started, the service is available at:
+```
+http://localhost:8080
+```
